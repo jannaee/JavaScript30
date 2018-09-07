@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <title>JS Drum Kit</title>
   <link rel="stylesheet" href="style.css">
-  <script src="src/main.js"></script>
 </head>
 <body>
 
@@ -56,8 +55,7 @@
   <audio data-key="h" src="sounds/ride.wav"></audio>
   <audio data-key="j" src="sounds/snare.wav"></audio>
   <audio data-key="k" src="sounds/tom.wav"></audio>
-  <audio data-key="l" src="sounds/tink.wav"></audio>ddfhdfg
-
+  <audio data-key="l" src="sounds/tink.wav"></audio>
 <script>
     //first: need to listen for the keyevent
     //then we need a functoin that is going to give us the event
@@ -77,12 +75,19 @@
       key.classList.add('playing');
     });
       //use a transisition end event, or if it was transitioning, like how it was in the css classes .playing to .key
-      function removeTransistion(key){
-        console.log(key);
+      function removeTransistion(e){//this does not refer to the removeTransition function, but where the function was called, or in the addEventListener. Additionally, this will refer to the 
+        if(e.propertyName !== 'transform') return;
+        //in other words skip it if it's not transform
+        
+        console.log(this); //this is equal to the key because, this refers to the value of the function that called it. removeTransistion is not being called here 
       }
       
       const keys = document.querySelectorAll('.key');
-      key.forEach(key => key.addEventListener('transitionend', removeTransistion));
+      keys.forEach(
+        function (key){
+          key.addEventListener('transitionend', removeTransistion)//this refers to this 'key' because this is where the function removeTransistion is being executed. And the value of this is the object that was called against it aka 'key'
+          
+        });//when you have an array of elements you can't listen to each of them unless you loop over every single element
 
 
 
