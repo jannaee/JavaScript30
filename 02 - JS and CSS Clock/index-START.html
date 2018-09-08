@@ -62,11 +62,41 @@
       background:black;
       position: absolute;
       top:50%;
+      transform-origin: 100%; /*this transform on the x-axis */
+      transform: rotate(90deg);/*sets the hands to 12:00 position*/
+      transition: all 0.05s; /*allows a transition with each movement */
+      transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);/*Cool as balls transition control with beziers!  */
     }
 
   </style>
 
   <script>
+//TO DO: Create a CSS clock
+//Takes in the current time from js
+//Update the hands based on the sec hr min
+
+//apply a rotate on each hand depending on what time it currently is
+//by default it rotates on the middle of the element. We want to rotate on the right hand side only
+
+const secondHand = document.querySelector('.second-hand');
+
+function setDate(){
+  //create a new date based off of the seconds
+  const now = new Date();//creating our now object from the prototype Date obj
+  const seconds = now.getSeconds();
+
+
+  const hour = now.getHours();
+  const minutes = now.getMinutes();
+
+}
+
+//Create a way to return seconds
+setInterval(setDate, 1000);
+
+// function removeTransition(){
+
+// }
 
 
   </script>
